@@ -26,7 +26,8 @@ func init() {
 	sql.Register("spatialite", &sqlite3.SQLiteDriver{
 		ConnectHook: func(conn *sqlite3.SQLiteConn) error {
 			for _, v := range LibNames {
-				if err := conn.LoadExtension(v.lib, v.proc); err == nil {
+				sqlite3conn, _ := conn.Conn()
+				if err := sqlite3conn.LoadExtension(v.lib, v.proc); err == nil {
 					return nil
 				}
 			}
