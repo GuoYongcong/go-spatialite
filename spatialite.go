@@ -25,12 +25,12 @@ var ErrSpatialiteNotFound = errors.New("shaxbee/go-spatialite: spatialite extens
 func init() {
 	sql.Register("spatialite", &sqlite3.SQLiteDriver{
 		ConnectHook: func(conn *sqlite3.SQLiteConn) error {
-			for _, v := range LibNames {
-				sqlite3conn, _ := conn.Conn()
-				if err := sqlite3conn.LoadExtension(v.lib, v.proc); err == nil {
-					return nil
-				}
-			}
+			// for _, v := range LibNames {
+			// 	sqlite3conn, _ := conn.Conn()
+			// 	if err := sqlite3conn.LoadExtension(v.lib, v.proc); err == nil {
+			// 		return nil
+			// 	}
+			// }
 			return ErrSpatialiteNotFound
 		},
 	})
